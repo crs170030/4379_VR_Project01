@@ -606,7 +606,7 @@ MonoBehaviour:
   startRadius: 0.2
   sizeLimit: 0.5
   grabLimit: 0.5
-  rateOfChange: 0.01
+  rateOfChange: 0.003
   minSpeed: 0.1
   socketGroup: {fileID: 3743295746647184949}
   groundCheck: {fileID: 3743295747324134946}
