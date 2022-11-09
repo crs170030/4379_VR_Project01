@@ -9,11 +9,13 @@ public class SnowGrow : MonoBehaviour
     public float grabLimit = 0.5f;
     public float rateOfChange = 0.1f;
     public float minSpeed = 0.1f;
+    public float rateOfMassChange = 0.01f;
 
     public GameObject socketGroup = null;
     public Transform groundCheck;
     float groundDistance = 0.4f;
     public LayerMask groundMask;
+    public PlayQuickSound soundPlayer = null;
 
     bool isGrounded = false;
     Vector3 scaleChange;
@@ -27,6 +29,8 @@ public class SnowGrow : MonoBehaviour
         scaleChange = new Vector3(rateOfChange, rateOfChange, rateOfChange);
         //set snowball to starting size
         transform.localScale = new Vector3(startRadius, startRadius, startRadius);
+        //get sound component
+        soundPlayer = GetComponent<PlayQuickSound>();
         //turn off item sockets
         if(socketGroup != null)
             socketGroup.SetActive(false);
@@ -55,6 +59,8 @@ public class SnowGrow : MonoBehaviour
             {
                 //apply scale change
                 transform.localScale += scaleChange;
+                //apply weight change
+                _rb.mass += rateOfMassChange;
                 //Debug.Log("Snowball size increased to :" + transform.localScale + " velocity= " + _rb.velocity);
             }
             if (transform.localScale.x >= sizeLimit)
@@ -66,8 +72,14 @@ public class SnowGrow : MonoBehaviour
 
     void TurnOnSockets()
     {
-        if (socketGroup != null)
+        if (socketGroup != null && socketGroup.activeSelf == false)
+        {
             socketGroup.SetActive(true);
+
+            //play sfx
+            if (soundPlayer != null)
+                soundPlayer.Play();
+        }
     }
 
     void UnGrabbable()

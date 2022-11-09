@@ -6,7 +6,7 @@ public class MenuPositionController : MonoBehaviour
 {
     //the camera to teleport in front of
     public Transform cam;
-    public Vector3 menuOffset = new Vector3(0,1.6f,0);
+    //public Vector3 menuOffset = new Vector3(0,1.6f,0);
     public float menuOffsetScale = 2f;
     Vector3 defaultPosition = new Vector3(0, 1.6f, 2.251f);
     Vector3 positionToMove;
@@ -14,15 +14,15 @@ public class MenuPositionController : MonoBehaviour
     void Start()
     {
         //reset canvas position
-        transform.position = defaultPosition;
+        //transform.position = defaultPosition;
     }
 
     public void WarpMenu()
     {
-        //transform.position = cam.transform.position + menuOffset;
-
         //set new position
-        positionToMove = (cam.transform.forward * menuOffsetScale) + menuOffset;
+        //Debug.Log("cam forward == " + cam.transform.forward);
+        positionToMove = cam.transform.position + (cam.transform.forward * menuOffsetScale);
+        //Debug.Log("position to move == " + positionToMove);
         transform.position = positionToMove;
 
         //set new rotation
