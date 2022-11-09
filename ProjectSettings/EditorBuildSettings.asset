@@ -6,8 +6,8 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Sandbox.unity
-    guid: 120cab643ec3bbe4688ccc1fae93bb4e
+    path: Assets/Scenes/Whitebox.unity
+    guid: 6d5fd6ea6446ea6438a3e5c4a2d1a22a
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: ed72be55522c8448bae8b0d66fa21adf,
       type: 2}
