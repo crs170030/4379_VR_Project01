@@ -15,7 +15,8 @@ public class SnowGrow : MonoBehaviour
     public Transform groundCheck;
     float groundDistance = 0.4f;
     public LayerMask groundMask;
-    public PlayQuickSound soundPlayer = null;
+    PlayQuickSound soundPlayer = null;
+    ProgressController progControl;
 
     bool isGrounded = false;
     Vector3 scaleChange;
@@ -31,6 +32,8 @@ public class SnowGrow : MonoBehaviour
         transform.localScale = new Vector3(startRadius, startRadius, startRadius);
         //get sound component
         soundPlayer = GetComponent<PlayQuickSound>();
+        //get ref to progress controller
+        progControl = FindObjectOfType<ProgressController>();
         //turn off item sockets
         if(socketGroup != null)
             socketGroup.SetActive(false);
@@ -75,6 +78,9 @@ public class SnowGrow : MonoBehaviour
         if (socketGroup != null && socketGroup.activeSelf == false)
         {
             socketGroup.SetActive(true);
+
+            //call progress script
+            progControl.Progress(this);
 
             //play sfx
             if (soundPlayer != null)
